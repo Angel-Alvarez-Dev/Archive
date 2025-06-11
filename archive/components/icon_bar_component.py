@@ -1,7 +1,7 @@
 import reflex as rx
 
 ICON_COLOR = "#2C5F2D"
-ICON_HOVER_COLOR = "#5EA96E"
+ICON_HOVER_COLOR = "#3A7F3D"
 FOCUS_RING_COLOR = "#3A7F3D"
 BG_COLOR = "#121212"
 
@@ -12,7 +12,7 @@ def icon_bar_component() -> rx.Component:
     return rx.el.div(
         rx.el.a(
             rx.icon(
-                "home", size=24, class_name=icon_svg_class
+                "folder", size=24, class_name=icon_svg_class
             ),
             href="/",
             aria_label="Go to archive.co Home",

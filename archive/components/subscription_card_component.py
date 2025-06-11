@@ -7,7 +7,7 @@ BODY_TEXT_COLOR = "#2C5F2D"
 CAPTION_TEXT_COLOR = "#4A7A54"
 BORDER_COLOR = "#2C5F2D"
 BORDER_HOVER_COLOR = "#3A7F3D"
-FONT_GEOGROTESK = "font-['GeoGrotesk',_sans-serif]"
+FONT_GEOGROTESK = "font-['Inter',_sans-serif]"
 
 
 def subscription_card_component(
@@ -16,7 +16,7 @@ def subscription_card_component(
     features: list[str],
     subscribe_link: str,
 ) -> rx.Component:
-    subscribe_button_classes = f"w-full {FONT_GEOGROTESK} text-[{BODY_TEXT_COLOR}] border-2 border-[{BORDER_COLOR}] bg-[{BG_COLOR}] font-medium py-2 px-4 rounded-lg hover:bg-[{BODY_TEXT_COLOR}] hover:text-black focus:outline-none focus:ring-2 focus:ring-[{BORDER_COLOR}] focus:ring-offset-2 transition-all duration-300 transform hover:-translate-y-0.5"
+    subscribe_button_classes = f"w-full {FONT_GEOGROTESK} text-[{BODY_TEXT_COLOR}] border-2 border-[{BORDER_COLOR}] bg-[{BG_COLOR}] font-semibold text-[1rem] py-2 px-4 rounded-lg hover:bg-[{BODY_TEXT_COLOR}] hover:text-black focus:outline-none focus:ring-2 focus:ring-[{BORDER_COLOR}] focus:ring-offset-2 transition-all duration-300 transform hover:-translate-y-0.5"
     return rx.el.div(
         rx.el.div(
             rx.el.div(
@@ -56,7 +56,7 @@ def subscription_card_component(
                         ),
                         rx.el.span(
                             feature,
-                            class_name=f"{FONT_GEOGROTESK} text-[0.875rem] text-[{BODY_TEXT_COLOR}]",
+                            class_name=f"{FONT_GEOGROTESK} text-[1rem] text-[{BODY_TEXT_COLOR}]",
                         ),
                         class_name="flex items-center mb-2",
                     ),

@@ -5,7 +5,7 @@ BODY_TEXT_COLOR = "#2C5F2D"
 CARD_BG_COLOR = "#1E1E1E"
 BORDER_COLOR = "#2C5F2D"
 BORDER_HOVER_COLOR = "#3A7F3D"
-FONT_GEOGROTESK = "font-['GeoGrotesk',_sans-serif]"
+FONT_GEOGROTESK = "font-['Inter',_sans-serif]"
 FONT_KOUGAPIXEL = "font-['KougaPixel',_monospace]"
 
 
@@ -46,17 +46,27 @@ def project_card_component(
             ),
             class_name=f"flex justify-between items-center py-3 border-b border-[{BORDER_COLOR}]",
         ),
-        rx.el.img(
-            src=image_url,
-            alt=project_name,
-            class_name="w-full h-56 object-cover aspect-video",
-            loading="lazy",
+        rx.el.div(
+            rx.el.img(
+                src=image_url,
+                alt=f"Project preview for {project_name}",
+                class_name="w-full h-56 object-cover aspect-video transition-transform duration-300 group-hover:scale-105",
+                loading="lazy",
+            ),
+            rx.el.div(
+                rx.el.p(
+                    project_name,
+                    class_name=f"{FONT_KOUGAPIXEL} text-3xl text-white",
+                ),
+                class_name="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+            ),
+            class_name="relative overflow-hidden",
         ),
         rx.el.div(
             rx.el.a(
                 rx.el.button(
                     "Go to design",
-                    class_name=f"w-full bg-[{BODY_TEXT_COLOR}] text-black {FONT_GEOGROTESK} font-medium py-2 px-4 rounded-lg hover:bg-[{BORDER_HOVER_COLOR}] focus:outline-none focus:ring-2 focus:ring-[{BORDER_COLOR}] focus:ring-offset-2 transition-all duration-200",
+                    class_name=f"w-full bg-[{BODY_TEXT_COLOR}] text-black {FONT_GEOGROTESK} font-semibold py-2 px-4 rounded-lg hover:bg-[{BORDER_HOVER_COLOR}] focus:outline-none focus:ring-2 focus:ring-[{BORDER_COLOR}] focus:ring-offset-2 transition-all duration-200 text-[1rem]",
                     style={
                         "--tw-ring-offset-color": CARD_BG_COLOR
                     },
@@ -66,5 +76,5 @@ def project_card_component(
             ),
             class_name="p-6",
         ),
-        class_name=f"bg-[{CARD_BG_COLOR}] rounded-lg border border-[{BORDER_COLOR}] w-full overflow-hidden green-noise relative transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_4px_rgba(44,95,45,0.5)] hover:border-[{BORDER_HOVER_COLOR}]",
+        class_name=f"bg-[{CARD_BG_COLOR}] rounded-lg border border-[{BORDER_COLOR}] w-full overflow-hidden green-noise relative transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(44,95,45,0.3)] hover:border-[{BORDER_HOVER_COLOR}] group",
     )

@@ -1,4 +1,5 @@
 import reflex as rx
+from archive.states.state import HomeState
 
 BG_COLOR = "#121212"
 CARD_BG_COLOR = "#1E1E1E"
@@ -7,177 +8,186 @@ BODY_TEXT_COLOR = "#2C5F2D"
 CAPTION_TEXT_COLOR = "#4A7A54"
 BORDER_COLOR = "#2C5F2D"
 BORDER_HOVER_COLOR = "#3A7F3D"
-FONT_URBANSPLASH = "font-['UrbanSplash',_cursive]"
-FONT_GEOGROTESK = "font-['GeoGrotesk',_sans-serif]"
+FONT_URBANSPLASH = "font-['Urbanist',_sans-serif]"
+FONT_GEOGROTESK = "font-['Inter',_sans-serif]"
 FONT_KOUGAPIXEL = "font-['KougaPixel',_monospace]"
 
 
-def _contact_card() -> rx.Component:
+def _hero_image_section() -> rx.Component:
     return rx.el.div(
         rx.el.div(
-            rx.el.div(
-                rx.el.span(
-                    "CONTACT",
-                    class_name=f"{FONT_GEOGROTESK} font-semibold text-lg text-[{HEADING_COLOR}]",
-                ),
-                class_name="flex-grow pl-3",
+            rx.el.img(
+                src="/archive_graffiti_transparent.png",
+                alt="Pixelated graffiti style art for archive.co",
+                class_name=f"w-36 h-36 md:w-44 md:h-44 mx-auto rounded-xl border-2 border-[{BORDER_COLOR}] object-cover transition-all duration-700 hover:scale-105 hover:border-[{BORDER_HOVER_COLOR}] hover:shadow-[0_0_30px_rgba(44,95,45,0.4)] hover:rotate-1 block",
+                loading="lazy",
             ),
-            rx.el.div(
-                rx.el.span(
-                    class_name="h-3 w-3 bg-[#FF5F56] rounded-full"
-                ),
-                rx.el.span(
-                    class_name="h-3 w-3 bg-[#FFBD2E] rounded-full"
-                ),
-                rx.el.span(
-                    class_name="h-3 w-3 bg-[#27C93F] rounded-full"
-                ),
-                class_name="flex items-center space-x-1.5 pr-3",
-            ),
-            class_name=f"flex justify-between items-center py-3 border-b border-[{BORDER_COLOR}]",
+            class_name="relative group transform transition-transform duration-500 hover:-translate-y-1",
         ),
         rx.el.div(
-            rx.icon(
-                "mail",
-                size=48,
-                class_name=f"mx-auto my-4 text-[{BODY_TEXT_COLOR}] pt-6",
-            ),
             rx.el.p(
-                "Do you have a question or a proposal? Let's talk!",
-                class_name=f"{FONT_GEOGROTESK} text-center text-[0.875rem] text-[{CAPTION_TEXT_COLOR}] mb-6",
+                "archive.co",
+                class_name=f"text-center {FONT_KOUGAPIXEL} text-[{CAPTION_TEXT_COLOR}] text-2xl md:text-3xl mt-4 transition-all duration-300 hover:text-[{BORDER_HOVER_COLOR}] hover:scale-105 hover:tracking-wider",
             ),
-            rx.el.a(
-                rx.el.button(
-                    "Contact",
-                    class_name=f"w-full {FONT_GEOGROTESK} text-[{BODY_TEXT_COLOR}] border-2 border-[{BORDER_COLOR}] bg-[{BG_COLOR}] py-2 px-4 rounded-lg hover:bg-[{BODY_TEXT_COLOR}] hover:text-black focus:outline-none focus:ring-2 focus:ring-[{BORDER_COLOR}] focus:ring-offset-2 focus:ring-offset-black transition-all duration-300 transform hover:-translate-y-0.5",
-                ),
-                href="mailto:contact@archive.co",
-            ),
-            class_name="p-6",
+            class_name="group",
         ),
-        class_name=f"bg-[{CARD_BG_COLOR}] rounded-lg border border-[{BORDER_COLOR}] w-full max-w-sm mx-auto green-noise relative overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_4px_rgba(44,95,45,0.5)] hover:border-[{BORDER_HOVER_COLOR}]",
+        class_name="mb-8",
+    )
+
+
+def _platform_buttons() -> rx.Component:
+    button_base_classes = f"w-full {FONT_GEOGROTESK} py-3 px-6 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 font-semibold text-[1rem]"
+    platform_button_classes = f"{button_base_classes} text-black bg-[{BODY_TEXT_COLOR}] hover:bg-[{BORDER_HOVER_COLOR}] hover:shadow-[0_4px_15px_rgba(44,95,45,0.4)] tracking-wide"
+    return rx.el.div(
+        rx.el.a(
+            rx.el.button(
+                "PATREON",
+                class_name=platform_button_classes,
+            ),
+            href="https://patreon.com/Archive_co?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=creatorshare_creator&utm_content=join_link",
+            target="_blank",
+            rel="noopener noreferrer",
+            is_external=True,
+            class_name="w-full md:w-auto",
+        ),
+        rx.el.a(
+            rx.el.button(
+                "CULTS3D",
+                class_name=platform_button_classes,
+            ),
+            href="https://cults3d.com/@Archive_co",
+            target="_blank",
+            rel="noopener noreferrer",
+            is_external=True,
+            class_name="w-full md:w-auto",
+        ),
+        class_name="flex flex-col md:flex-row gap-4",
+    )
+
+
+def _social_links() -> rx.Component:
+    social_links_data = [
+        {
+            "icon": "github",
+            "href": "https://github.com/Angel-Alvarez-Dev",
+            "label": "GitHub",
+        },
+        {
+            "icon": "pin",
+            "href": "https://mx.pinterest.com/Archivo_co/",
+            "label": "Pinterest",
+        },
+        {
+            "icon": "instagram",
+            "href": "https://www.instagram.com/archivo.co/?utm_source=ig_web_button_share_sheet",
+            "label": "Instagram",
+        },
+        {
+            "icon": "package-open",
+            "href": "https://cults3d.com/@Archive_co",
+            "label": "Cults3D",
+        },
+        {
+            "icon": "circle-parking",
+            "href": "https://patreon.com/Archive_co?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=creatorshare_creator&utm_content=join_link",
+            "label": "Patreon",
+        },
+    ]
+    return rx.el.div(
+        rx.foreach(
+            social_links_data,
+            lambda link: rx.el.a(
+                rx.icon(
+                    tag=link["icon"],
+                    size=24,
+                    class_name=f"stroke-[{BODY_TEXT_COLOR}] hover:stroke-[{BORDER_HOVER_COLOR}] hover:scale-110 transition-all duration-300 transform hover:rotate-6",
+                ),
+                href=link["href"],
+                target="_blank",
+                rel="noopener noreferrer",
+                is_external=True,
+                class_name="p-2 rounded-lg hover:bg-[rgba(44,95,45,0.1)] transition-all duration-200 group",
+                title=link["label"],
+            ),
+        ),
+        class_name="flex flex-wrap justify-center items-center gap-3 md:gap-4",
     )
 
 
 def main_content_component() -> rx.Component:
-    button_base_classes = f"w-full {FONT_GEOGROTESK} py-3 px-6 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black transition-all duration-300 transform hover:-translate-y-0.5"
-    subscribe_button_classes = f"{button_base_classes} text-[{BODY_TEXT_COLOR}] border-2 border-[{BORDER_COLOR}] bg-black hover:bg-[{BODY_TEXT_COLOR}] hover:text-black hover:shadow-[0_2px_4px_rgba(44,95,45,0.5)]"
-    platform_button_classes = f"{button_base_classes} text-black bg-[{BODY_TEXT_COLOR}] hover:bg-[{BORDER_HOVER_COLOR}] hover:shadow-[0_2px_4px_rgba(44,95,45,0.5)]"
-    section_spacing = "my-16"
+    subscribe_button_classes = f"w-full {FONT_GEOGROTESK} text-[{BODY_TEXT_COLOR}] border-2 border-[{BORDER_COLOR}] bg-black py-3 px-4 rounded-lg hover:bg-[{BODY_TEXT_COLOR}] hover:text-black focus:outline-none focus:ring-2 focus:ring-[{BORDER_COLOR}] focus:ring-offset-2 focus:ring-offset-black transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 text-[1rem] font-semibold"
+    section_spacing = "py-16"
     return rx.el.main(
         rx.el.section(
-            rx.el.div(
-                rx.el.img(
-                    src="/pixel_art_avatar.png",
-                    alt="archive.co Pixel Art Avatar",
-                    class_name=f"w-32 h-32 md:w-40 md:h-40 mx-auto rounded-lg border-2 border-[{BORDER_COLOR}] object-cover transition-opacity duration-500 opacity-0",
-                    loading="lazy",
-                    custom_attrs={
-                        "onload": "this.style.opacity = 1;"
-                    },
-                ),
-                rx.el.p(
-                    "archive.co",
-                    class_name=f"text-center {FONT_KOUGAPIXEL} text-[{CAPTION_TEXT_COLOR}] text-2xl md:text-3xl mt-4",
-                ),
-                class_name="mb-8",
-            ),
+            _hero_image_section(),
             rx.el.h1(
                 "3D MODELS & RESOURCES",
-                class_name=f"text-center {FONT_URBANSPLASH} text-[{HEADING_COLOR}] text-[2rem] mb-2",
+                class_name=f"text-center {FONT_URBANSPLASH} text-[{HEADING_COLOR}] text-[2.5rem] md:text-[3rem] mb-4 tracking-wide font-bold",
             ),
             rx.el.div(
-                class_name=f"w-1/2 mx-auto h-[1px] bg-[{BORDER_COLOR}] mb-6"
+                class_name=f"w-1/2 mx-auto h-[2px] bg-[{BORDER_COLOR}] mb-8 rounded-full"
             ),
-            rx.el.a(
-                rx.el.button(
-                    "Subscribe to archive.co",
-                    class_name=subscribe_button_classes,
+            rx.cond(
+                HomeState.subscribed,
+                rx.el.div(
+                    "Welcome to archive.co!",
+                    class_name=f"w-full mb-6 {FONT_GEOGROTESK} text-lg text-white font-semibold p-4 text-center rounded-lg bg-[{CARD_BG_COLOR}] border-2 border-[{BORDER_HOVER_COLOR}] shadow-[0_0_20px_rgba(58,127,61,0.5)]",
                 ),
-                href="#subscribe",
-                class_name="block mb-4",
-            ),
-            rx.el.div(
-                rx.el.a(
-                    rx.el.button(
-                        "GUMROAD",
-                        class_name=platform_button_classes,
+                rx.el.form(
+                    rx.el.label(
+                        "Enter your email to join archive.co.",
+                        html_for="email",
+                        class_name=f"{FONT_GEOGROTESK} text-center w-full mb-2 text-[{CAPTION_TEXT_COLOR}] text-base font-medium",
                     ),
-                    href="https://gumroad.com/archive.co",
-                    is_external=True,
-                    class_name="w-full md:w-auto",
-                ),
-                rx.el.a(
-                    rx.el.button(
-                        "SKETCHFAB",
-                        class_name=platform_button_classes,
+                    rx.el.div(
+                        rx.el.input(
+                            placeholder="your@mail.com",
+                            name="email",
+                            id="email",
+                            type="email",
+                            required=True,
+                            class_name=f"w-full {FONT_GEOGROTESK} text-base bg-black border-2 border-[{BORDER_COLOR}] text-[{BODY_TEXT_COLOR}] placeholder:text-[{CAPTION_TEXT_COLOR}] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[{BORDER_HOVER_COLOR}] focus:border-[{BORDER_HOVER_COLOR}] transition-all",
+                        ),
+                        rx.el.button(
+                            "Join archive.co",
+                            type="submit",
+                            class_name=subscribe_button_classes,
+                        ),
+                        class_name="flex flex-col items-center gap-4 w-full",
                     ),
-                    href="https://sketchfab.com/archive.co",
-                    is_external=True,
-                    class_name="w-full md:w-auto",
+                    rx.el.p(
+                        "Questions? ",
+                        rx.el.a(
+                            "Let's talk!",
+                            href="mailto:contact@archive.co",
+                            class_name="underline hover:text-white",
+                        ),
+                        class_name=f"{FONT_GEOGROTESK} text-center mt-4 text-[{CAPTION_TEXT_COLOR}] text-sm font-medium",
+                    ),
+                    on_submit=HomeState.handle_subscribe,
+                    reset_on_submit=True,
+                    class_name="w-full mb-6 flex flex-col items-center",
                 ),
-                class_name="flex flex-col md:flex-row gap-4",
             ),
-            class_name=f"flex flex-col items-center {section_spacing}",
+            _platform_buttons(),
+            class_name=f"flex flex-col items-center {section_spacing} px-4",
         ),
         rx.el.section(
             rx.el.h2(
                 "ABOUT",
-                class_name=f"{FONT_URBANSPLASH} text-[{HEADING_COLOR}] text-[2rem] mb-1 text-center",
+                class_name=f"{FONT_URBANSPLASH} text-[{HEADING_COLOR}] text-[2rem] font-bold md:text-[2.2rem] mb-2 text-center tracking-wide",
             ),
             rx.el.div(
-                class_name=f"w-1/4 mx-auto h-[1px] bg-[{BORDER_COLOR}] mb-3"
+                class_name=f"w-1/4 mx-auto h-[2px] bg-[{BORDER_COLOR}] mb-6 rounded-full"
             ),
             rx.el.p(
                 "archive.co is a curated collection of high-quality 3D models and creative resources, designed for artists, developers, and enthusiasts.",
-                class_name=f"{FONT_GEOGROTESK} text-[{BODY_TEXT_COLOR}] text-[0.875rem] leading-relaxed text-center",
+                class_name=f"{FONT_GEOGROTESK} text-[{BODY_TEXT_COLOR}] text-[1rem] leading-relaxed text-center max-w-2xl mx-auto",
             ),
             class_name=f"px-4 {section_spacing}",
         ),
         rx.el.section(
-            _contact_card(),
-            class_name=f"px-4 {section_spacing}",
+            _social_links(), class_name=f"pb-16 pt-8"
         ),
-        rx.el.section(
-            rx.el.div(
-                rx.el.a(
-                    rx.icon(
-                        tag="twitter",
-                        size=24,
-                        class_name=f"stroke-[{BODY_TEXT_COLOR}] hover:stroke-[{BORDER_HOVER_COLOR}] hover:scale-105 transition-all duration-300",
-                    ),
-                    href="#",
-                    is_external=True,
-                ),
-                rx.el.a(
-                    rx.icon(
-                        tag="instagram",
-                        size=24,
-                        class_name=f"stroke-[{BODY_TEXT_COLOR}] hover:stroke-[{BORDER_HOVER_COLOR}] hover:scale-105 transition-all duration-300",
-                    ),
-                    href="#",
-                    is_external=True,
-                ),
-                rx.el.a(
-                    rx.icon(
-                        tag="youtube",
-                        size=24,
-                        class_name=f"stroke-[{BODY_TEXT_COLOR}] hover:stroke-[{BORDER_HOVER_COLOR}] hover:scale-105 transition-all duration-300",
-                    ),
-                    href="#",
-                    is_external=True,
-                ),
-                rx.el.a(
-                    rx.icon(
-                        tag="github",
-                        size=24,
-                        class_name=f"stroke-[{BODY_TEXT_COLOR}] hover:stroke-[{BORDER_HOVER_COLOR}] hover:scale-105 transition-all duration-300",
-                    ),
-                    href="#",
-                    is_external=True,
-                ),
-                class_name="flex flex-wrap justify-center items-center gap-6 md:gap-8",
-            ),
-            class_name=f"{section_spacing}",
-        ),
+        class_name="min-h-screen",
     )

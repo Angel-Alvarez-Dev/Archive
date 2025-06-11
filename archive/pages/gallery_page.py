@@ -14,8 +14,8 @@ CARD_BG_COLOR = "#1E1E1E"
 HEADING_COLOR = "#1B3A28"
 BODY_TEXT_COLOR = "#2C5F2D"
 BORDER_COLOR = "#2C5F2D"
-FONT_URBANSPLASH = "font-['UrbanSplash',_cursive]"
-FONT_GEOGROTESK = "font-['GeoGrotesk',_sans-serif]"
+FONT_URBANSPLASH = "font-['Urbanist',_sans-serif]"
+FONT_GEOGROTESK = "font-['Inter',_sans-serif]"
 
 
 def skeleton_loader() -> rx.Component:
@@ -36,7 +36,7 @@ def gallery_page() -> rx.Component:
             rx.el.div(
                 rx.el.h1(
                     "Project Gallery",
-                    class_name=f"text-[2rem] {FONT_URBANSPLASH} text-[{HEADING_COLOR}] text-center mb-1",
+                    class_name=f"text-[2rem] {FONT_URBANSPLASH} font-bold text-[{HEADING_COLOR}] text-center mb-1",
                 ),
                 rx.el.div(
                     class_name=f"w-1/2 mx-auto h-[1px] bg-[{BORDER_COLOR}] mb-8"

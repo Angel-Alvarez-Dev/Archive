@@ -1,3 +1,7 @@
+.web
+.states
+assets/external/
+*.db
 # Python virtual environments
 .venv/
 venv/
