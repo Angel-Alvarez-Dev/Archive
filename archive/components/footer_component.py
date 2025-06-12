@@ -12,14 +12,14 @@ def footer_component() -> rx.Component:
         ),
         rx.el.div(
             rx.el.a(
-                "Email: contact@archive.co",
-                href="mailto:contact@archive.co",
+                "Email: alvarezvillegazangel@gmail.com",
+                href="mailto:alvarezvillegazangel@gmail.com",
                 class_name="hover:text-white",
             ),
             rx.el.span(" | ", class_name="mx-2"),
             rx.el.a(
                 "Contact Page",
-                href="mailto:contact@archive.co",
+                href="mailto:alvarezvillegazangel@gmail.com",
                 class_name="hover:text-white",
             ),
             class_name=f"text-center {FONT_GEOGROTESK} text-[{CAPTION_TEXT_COLOR}] text-sm mb-8 flex justify-center items-center",

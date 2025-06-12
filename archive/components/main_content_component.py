@@ -159,7 +159,7 @@ def main_content_component() -> rx.Component:
                         "Questions? ",
                         rx.el.a(
                             "Let's talk!",
-                            href="mailto:contact@archive.co",
+                            href="mailto:alvarezvillegazangel@gmail.com",
                             class_name="underline hover:text-white",
                         ),
                         class_name=f"{FONT_GEOGROTESK} text-center mt-4 text-[{CAPTION_TEXT_COLOR}] text-sm font-medium",

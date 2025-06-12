@@ -10,6 +10,8 @@ from archive.components.main_content_component import (
 from archive.components.footer_component import footer_component
 from archive.pages.subscribe_page import subscribe_page
 from archive.pages.gallery_page import gallery_page
+from archive.db import init_db
+
 
 BG_COLOR = "#121212"
 PRIMARY_TEXT_COLOR = "#2C5F2D"
