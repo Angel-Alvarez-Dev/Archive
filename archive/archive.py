@@ -1,20 +1,30 @@
 import reflex as rx
 import json
 from archive.components.header_component import header_component
-from archive.components.icon_bar_component import (
-    icon_bar_component,
-)
+from archive.components.navbar_component import navbar_component
 from archive.components.main_content_component import (
     main_content_component,
 )
 from archive.components.footer_component import footer_component
 from archive.pages.subscribe_page import subscribe_page
 from archive.pages.gallery_page import gallery_page
-from archive.db import init_db
-
+from archive.pages.magazine_page import magazine_page
+from archive.pages.shop_page import shop_page
+from archive.pages.download_success_page import (
+    download_success_page,
+)
+from archive.pages.privacy_policy_page import (
+    privacy_policy_page,
+)
+from archive.pages.terms_page import terms_page
+from archive.pages.refund_policy_page import refund_policy_page
+from archive.pages.copyright_notice_page import (
+    copyright_notice_page,
+)
+from archive.pages.support_page import support_page
 
 BG_COLOR = "#121212"
-PRIMARY_TEXT_COLOR = "#2C5F2D"
+PRIMARY_TEXT_COLOR = "#E0E0E0"
 FONT_GEOGROTESK = "font-['Inter',_sans-serif]"
 structured_data = {
     "@context": "https://schema.org",
@@ -25,7 +35,7 @@ structured_data = {
     "sameAs": [
         "https://github.com/Angel-Alvarez-Dev",
         "https://mx.pinterest.com/Archivo_co/",
-        "patreon.com/Archive_co",
+        "https://patreon.com/Archive_co",
         "https://cults3d.com/@Archive_co",
     ],
 }
@@ -33,19 +43,23 @@ structured_data = {
 
 def index() -> rx.Component:
     return rx.el.div(
+        navbar_component(),
         rx.el.div(
             header_component(),
-            icon_bar_component(),
             main_content_component(),
             footer_component(),
-            class_name=f"max-w-[480px] mx-auto px-4 {FONT_GEOGROTESK}",
+            class_name=f"max-w-7xl mx-auto px-4 {FONT_GEOGROTESK}",
         ),
         class_name=f"min-h-screen bg-[{BG_COLOR}] text-[{PRIMARY_TEXT_COLOR}]",
     )
 
 
 app = rx.App(
-    theme=rx.theme(appearance="light"),
+    theme=rx.theme(
+        appearance="light",
+        accent_color="green",
+        radius="large",
+    ),
     head_components=[
         rx.el.script(
             json.dumps(structured_data),
@@ -130,4 +144,75 @@ app.add_page(
             "content": "/archive-co-logo.svg",
         },
     ],
+)
+app.add_page(
+    shop_page,
+    route="/shop",
+    title="Shop - archive.co",
+    description="Purchase high-quality 3D models and assets from the archive.co shop.",
+    meta=[
+        {
+            "property": "og:title",
+            "content": "Shop - archive.co",
+        },
+        {
+            "property": "og:description",
+            "content": "Purchase high-quality 3D models and assets from the archive.co shop.",
+        },
+        {
+            "property": "og:image",
+            "content": "/archive-co-logo.svg",
+        },
+    ],
+)
+app.add_page(
+    magazine_page,
+    route="/magazine",
+    title="archive.co Magazine – 3D Printing Articles & News",
+    description="Read the latest articles, tutorials, and news about 3D printing, modeling, and creative tech from archive.co.",
+    meta=[
+        {
+            "property": "og:title",
+            "content": "archive.co Magazine – 3D Printing Articles & News",
+        },
+        {
+            "property": "og:description",
+            "content": "Read the latest articles, tutorials, and news about 3D printing, modeling, and creative tech from archive.co.",
+        },
+        {
+            "property": "og:image",
+            "content": "/archive-co-logo.svg",
+        },
+    ],
+)
+app.add_page(
+    download_success_page,
+    route="/download_success",
+    title="Download Your File - archive.co",
+    description="Download your purchased file from archive.co.",
+)
+app.add_page(
+    privacy_policy_page,
+    route="/privacy",
+    title="Privacy Policy - archive.co",
+)
+app.add_page(
+    terms_page,
+    route="/terms",
+    title="Terms and Conditions - archive.co",
+)
+app.add_page(
+    refund_policy_page,
+    route="/refund",
+    title="Refund Policy - archive.co",
+)
+app.add_page(
+    copyright_notice_page,
+    route="/copyright",
+    title="Copyright Notice - archive.co",
+)
+app.add_page(
+    support_page,
+    route="/support",
+    title="Support - archive.co",
 )

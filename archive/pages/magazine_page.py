@@ -1,20 +1,21 @@
 import reflex as rx
 from archive.components.header_component import header_component
 from archive.components.footer_component import footer_component
-from archive.components.subscription_card_component import (
-    subscription_card_component,
+from archive.components.magazine_post_card_component import (
+    magazine_post_card_component,
 )
 from archive.components.navbar_component import navbar_component
-from archive.states.state import SubscribeState
+from archive.states.state import MagazineState
 
 BG_COLOR = "#121212"
 HEADING_COLOR = "#E0E0E0"
+BODY_TEXT_COLOR = "#B0B0B0"
 BORDER_COLOR = "#2C5F2D"
 FONT_URBANSPLASH = "font-['Urbanist',_sans-serif]"
 FONT_GEOGROTESK = "font-['Inter',_sans-serif]"
 
 
-def subscribe_page() -> rx.Component:
+def magazine_page() -> rx.Component:
     section_spacing = "my-16"
     return rx.el.div(
         navbar_component(),
@@ -22,7 +23,7 @@ def subscribe_page() -> rx.Component:
             header_component(),
             rx.el.div(
                 rx.el.h1(
-                    "Subscription Plans",
+                    "Magazine",
                     class_name=f"text-[2rem] {FONT_URBANSPLASH} font-bold text-[{HEADING_COLOR}] text-center mb-1",
                 ),
                 rx.el.div(
@@ -32,13 +33,8 @@ def subscribe_page() -> rx.Component:
             ),
             rx.el.div(
                 rx.foreach(
-                    SubscribeState.plans,
-                    lambda plan: subscription_card_component(
-                        plan_name=plan["name"],
-                        price=plan["price"],
-                        features=plan["features"],
-                        subscribe_link=plan["link"],
-                    ),
+                    MagazineState.posts,
+                    magazine_post_card_component,
                 ),
                 class_name="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-8 px-4 md:px-8 max-w-7xl mx-auto items-stretch",
             ),

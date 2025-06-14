@@ -1,7 +1,7 @@
 import reflex as rx
 
-SUBTITLE_COLOR = "#4A7A54"
-ACCENT_COLOR = "#1B3A28"
+SUBTITLE_COLOR = "#B0B0B0"
+ACCENT_COLOR = "#E0E0E0"
 FONT_URBANSPLASH = "font-['Urbanist',_sans-serif]"
 FONT_GEOGROTESK = "font-['Inter',_sans-serif]"
 
